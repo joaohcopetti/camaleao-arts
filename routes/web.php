@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,5 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class)->name('home');
+Route::get('/entrar', [AuthenticatedSessionController::class, 'create'])->name('auth.create');
+Route::post('/entrar', [AuthenticatedSessionController::class, 'store'])->name('auth.store');
 // Route::get('/artes', --)->name('arts.index');
 // Route::get('categorias/{category}')->name('categories.show');
