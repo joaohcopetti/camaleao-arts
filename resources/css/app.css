@@ -1,3 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwind.css';
+
+@layer base {
+    :root,
+    html,
+    body,
+    #app {
+        @apply bg-base-300;
+    }
+}
