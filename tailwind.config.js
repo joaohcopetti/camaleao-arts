@@ -1,7 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [
-        './resources/js/**/*.{vue,ts}',
-    ],
-    plugins: [require("daisyui")],
-};
+  content: ['./resources/js/**/*.{vue,ts}'],
+  plugins: [require('daisyui')]
+}

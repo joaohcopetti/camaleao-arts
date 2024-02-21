@@ -13,10 +13,10 @@ return new class () extends Migration {
         Schema::create('arts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image_path');
             $table->string('file_path');
             $table->foreignId('category_id')
-                ->constrained('categories');
+                ->constrained('categories')
+                ->nullOnDelete();
             $table->timestamps();
         });
     }
