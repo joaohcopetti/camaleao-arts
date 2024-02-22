@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\DashboardArtController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,19 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class)->name('home');
-Route::get('/entrar', [AuthenticatedSessionController::class, 'create'])->name('auth.create');
-Route::post('/entrar', [AuthenticatedSessionController::class, 'store'])->name('auth.store');
+
+Route::name('auth.')->middleware('guest')->group(function () {
+    Route::get('/entrar', [AuthenticatedSessionController::class, 'create'])->name('create');
+    Route::post('/entrar', [AuthenticatedSessionController::class, 'store'])->name('store');
+});
+
+Route::name('dashboard.')
+    ->prefix('painel')
+    ->middleware(['auth', 'can:access_admin_panel'])
+    ->group(function () {
+        Route::get('/artes', [DashboardArtController::class, 'index'])->name('arts.index');
+        Route::get('/artes/nova', [DashboardArtController::class, 'create'])->name('arts.create');
+        Route::post('/artes/nova', [DashboardArtController::class, 'store'])->name('arts.store');
+    });
 // Route::get('/artes', --)->name('arts.index');
 // Route::get('categorias/{category}')->name('categories.show');

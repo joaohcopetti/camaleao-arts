@@ -1,4 +1,5 @@
 import '../css/app.css'
+import '@/libs/fontawesome'
 
 import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
@@ -20,6 +21,7 @@ createInertiaApp({
       .addRouteNavigationListener()
       .addInertiaPlugin(plugin)
       .addGlobalComponents()
+      .addFontAwesome()
       .mount(el)
   },
   progress: {
