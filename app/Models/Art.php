@@ -10,7 +10,13 @@ class Art extends Model
 {
     use HasFactory;
 
-    protected static $STORAGE_PATH = 'app/artes';
+    protected $table = 'arts';
+    protected $fillable = [
+        'name',
+        'filepath'
+    ];
+
+    public static $STORAGE_PATH = 'artes';
 
     public function category(): BelongsTo
     {

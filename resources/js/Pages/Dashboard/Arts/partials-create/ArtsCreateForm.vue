@@ -24,12 +24,15 @@ const onInputFile = (file) => {
       label="Nome"
       v-model="form.name"
       placeholder="Digite o nome da arte..."
+      :error-message="form.errors.name"
     />
     <AppInputFile
       @change="onInputFile"
       label="Arquivo da arte"
       name="file"
       hint="Tipos aceitos: .cdr"
+      :error-message="form.errors.file"
+      accept=".cdr"
     />
     <AppCombobox
       placeholder="Escolha uma categoria..."
@@ -39,6 +42,7 @@ const onInputFile = (file) => {
       :items="categories"
       :display-value="(item: object) => (item ? item['name'] : '')"
       search-prop="name"
+      :error-message="form.errors.category"
     >
       <template #option="item"> {{ item.name }} </template>
     </AppCombobox>

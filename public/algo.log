@@ -1,0 +1,25 @@
+Setting _INKSCAPE_GC=disable as a workaround for broken libgc
+Gtk-Message: 17:47:33.391: Failed to load module "xapp-gtk3-module"
+Gtk-Message: 17:47:33.391: Failed to load module "appmenu-gtk-module"
+/home/joao/Desktop/camaleão/camaleao-arts/tools/inkscape/lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /usr/lib/x86_64-linux-gnu/gvfs/libgvfscommon.so)
+Failed to load module: /usr/lib/x86_64-linux-gnu/gio/modules/libgioremote-volume-monitor.so
+/home/joao/Desktop/camaleão/camaleao-arts/tools/inkscape/lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /lib/x86_64-linux-gnu/libgnutls.so.30)
+Failed to load module: /usr/lib/x86_64-linux-gnu/gio/modules/libgiognutls.so
+/home/joao/Desktop/camaleão/camaleao-arts/tools/inkscape/lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /lib/x86_64-linux-gnu/libproxy.so.1)
+Failed to load module: /usr/lib/x86_64-linux-gnu/gio/modules/libgiolibproxy.so
+/home/joao/Desktop/camaleão/camaleao-arts/tools/inkscape/lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.33' not found (required by /usr/lib/x86_64-linux-gnu/gio/modules/libgvfsdbus.so)
+Failed to load module: /usr/lib/x86_64-linux-gnu/gio/modules/libgvfsdbus.so
+
+** (org.inkscape.Inkscape:70301): WARNING **: 17:47:33.502: Duplicate option text ('Eixo X') for parameter 'r1_ax' in extension 'org.inkscape.render.poly_3d'.
+
+** (org.inkscape.Inkscape:70301): WARNING **: 17:47:33.502: Duplicate option text ('Eixo X') for parameter 'r2_ax' in extension 'org.inkscape.render.poly_3d'.
+
+** (org.inkscape.Inkscape:70301): WARNING **: 17:47:33.502: Duplicate option text ('Eixo X') for parameter 'r3_ax' in extension 'org.inkscape.render.poly_3d'.
+
+** (org.inkscape.Inkscape:70301): WARNING **: 17:47:33.502: Duplicate option text ('Eixo X') for parameter 'r4_ax' in extension 'org.inkscape.render.poly_3d'.
+
+** (org.inkscape.Inkscape:70301): WARNING **: 17:47:33.502: Duplicate option text ('Eixo X') for parameter 'r5_ax' in extension 'org.inkscape.render.poly_3d'.
+
+** (org.inkscape.Inkscape:70301): WARNING **: 17:47:33.502: Duplicate option text ('Eixo X') for parameter 'r6_ax' in extension 'org.inkscape.render.poly_3d'.
+
+** (org.inkscape.Inkscape:70301): WARNING **: 17:47:33.505: Duplicate option text ('SGI Log') for parameter 'compression' in extension 'org.inkscape.raster.tiff_output'.
