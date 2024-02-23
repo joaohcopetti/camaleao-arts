@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Actions\StoreCorelAsImageAction;
 use App\Http\Requests\DashboardArtRequest;
+use App\Http\Resources\ArtResource;
 use App\Models\Art;
 use App\Models\Category;
 use Illuminate\Http\UploadedFile;
@@ -14,13 +15,15 @@ class DashboardArtController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Dashboard/Arts/TheDashboardArts');
+        return Inertia::render('Dashboard/Arts/TheDashboardArts', [
+            'arts' => ArtResource::collection(Art::latest()->paginate())
+        ]);
     }
 
     public function create()
     {
         return Inertia::render('Dashboard/Arts/TheDashboardArtsCreate', [
-            'categories' => Category::orderBy('name')->get()
+            'categories' =>  Category::orderBy('name')->get()
         ]);
     }
 

@@ -3,25 +3,17 @@ import { computed } from 'vue'
 import { FontAwesomeIcon as FWIcon } from '@fortawesome/vue-fontawesome'
 import { AppButtonProps } from '@/types/components'
 
-const props = defineProps<AppButtonProps>()
+const props = withDefaults(defineProps<AppButtonProps>(), {
+  as: 'button'
+})
 
-const disabled = computed(() => props.loading)
+const disabled = computed(() => props.loading || undefined)
 </script>
 
 <template>
-  <button
-    class="btn"
-    :disabled="disabled"
-  >
-    <span
-      v-if="loading"
-      class="loading loading-spinner"
-    />
-    <FWIcon
-      v-else-if="icon"
-      :icon="icon"
-      fixed-width
-    />
+  <Component :is="as" class="btn" :disabled="disabled">
+    <span v-if="loading" class="loading loading-spinner" />
+    <FWIcon v-else-if="icon" :icon="icon" fixed-width />
     <span v-if="label">{{ label }}</span>
-  </button>
+  </Component>
 </template>

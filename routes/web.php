@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ArtController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardArtController;
 use App\Http\Controllers\HomeController;
@@ -21,6 +22,19 @@ Route::get('/', HomeController::class)->name('home');
 Route::name('auth.')->middleware('guest')->group(function () {
     Route::get('/entrar', [AuthenticatedSessionController::class, 'create'])->name('create');
     Route::post('/entrar', [AuthenticatedSessionController::class, 'store'])->name('store');
+});
+
+Route::name('images.')->group(function () {
+    Route::get('/imagens/{art}/download', [ArtController::class, 'downloadArt'])
+        ->name('download');
+
+    Route::get('/imagens/{art}/download-project', [ArtController::class, 'downloadProject'])
+        ->name('download-project');
+
+    Route::get('/imagens/{filepath}', [ArtController::class, 'getArt'])
+        ->where('filepath', '.*')
+        ->name('get');
+
 });
 
 Route::name('dashboard.')
