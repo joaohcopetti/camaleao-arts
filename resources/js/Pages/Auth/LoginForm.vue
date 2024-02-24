@@ -8,7 +8,10 @@ const form = useForm({
 </script>
 
 <template>
-  <AppForm :form="form" :endpoint="route('auth.store')">
+  <AppForm
+    :form="form"
+    :endpoint="route('auth.store')"
+  >
     {{ $attrs.errors }}
     <AppInput
       v-model="form.email"
@@ -26,6 +29,10 @@ const form = useForm({
       name="password"
       :error-message="form.errors.password"
     />
-    <AppButton :loading="form.processing" label="Entrar" class="w-full btn-primary" />
+    <AppButton
+      :loading="form.processing"
+      label="Entrar"
+      class="w-full btn-primary"
+    />
   </AppForm>
 </template>

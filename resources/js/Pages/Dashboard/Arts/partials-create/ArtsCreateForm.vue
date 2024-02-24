@@ -24,7 +24,10 @@ const onInputFile = (file: File | undefined) => {
 </script>
 
 <template>
-  <AppForm :form="form" :endpoint="route('dashboard.arts.store')">
+  <AppForm
+    :form="form"
+    :endpoint="route('dashboard.arts.store')"
+  >
     <AppInput
       v-model="form.name"
       name="name"

@@ -7,4 +7,5 @@ use Spatie\Permission\Models\Permission as SpatiePermission;
 class Permission extends SpatiePermission
 {
     public const ACCESS_ADMIN_PANEL = 'ACCESS_ADMIN_PANEL';
+    public const ACCESS_ARTS = 'ACCESS_ARTS';
 }

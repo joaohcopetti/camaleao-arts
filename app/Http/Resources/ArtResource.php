@@ -20,11 +20,10 @@ class ArtResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            // 'filepath' => $this->filepath,
             'category' => new CategoryResource($this->category),
-            'image_filepath' => route('images.get', ['filepath' => $this->filepath]),
-            'image_download_url' => route('images.download', ['art' => $this->id]),
-            'filepath_download_url' => route('images.download-project', ['art' => $this->id]),
+            'image_url' => route('arts.image', ['filename' => $this->imageFilename]),
+            'image_download_url' => route('arts.image-download', $this),
+            'file_download_url' => route('arts.file-download', $this),
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

@@ -11,9 +11,20 @@ const disabled = computed(() => props.loading || undefined)
 </script>
 
 <template>
-  <Component :is="as" class="btn" :disabled="disabled">
-    <span v-if="loading" class="loading loading-spinner" />
-    <FWIcon v-else-if="icon" :icon="icon" fixed-width />
+  <Component
+    :is="as"
+    class="btn"
+    :disabled="disabled"
+  >
+    <span
+      v-if="loading"
+      class="loading loading-spinner"
+    />
+    <FWIcon
+      v-else-if="icon"
+      :icon="icon"
+      fixed-width
+    />
     <span v-if="label">{{ label }}</span>
   </Component>
 </template>

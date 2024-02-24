@@ -11,6 +11,11 @@ defineProps<DashboardListProps>()
 
 <template>
   <div>
-    <DashboardArtsListItem v-for="art in arts" :key="art.id" class="last:mb-0 mb-5" :art="art" />
+    <DashboardArtsListItem
+      v-for="art in arts"
+      :key="art.id"
+      class="last:mb-0 mb-10"
+      :art="art"
+    />
   </div>
 </template>

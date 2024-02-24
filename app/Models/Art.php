@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -28,8 +29,17 @@ class Art extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public static function imageFilepath(string $filepath): string
+    public function filename(): Attribute
     {
-        return Str::replace('.cdr', '.png', $filepath);
+        return Attribute::make(
+            get: fn () => pathinfo($this->filepath, PATHINFO_BASENAME)
+        );
+    }
+
+    public function imageFilename(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => pathinfo($this->filepath, PATHINFO_FILENAME) . '.png'
+        );
     }
 }

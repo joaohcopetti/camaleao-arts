@@ -40,7 +40,10 @@ const onFocus = (event: Event) => {
 </script>
 
 <template>
-  <form @submit.prevent="onSubmit" @focus.capture="onFocus">
+  <form
+    @submit.prevent="onSubmit"
+    @focus.capture="onFocus"
+  >
     <slot />
 
     <slot name="footer" />

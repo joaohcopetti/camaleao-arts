@@ -40,9 +40,9 @@ export interface Category {
 export interface Art {
   id: string
   name: string
-  image_filepath: string
+  image_url: string
   image_download_url: string
-  filepath_download_url: string
+  file_download_url: string
   category: Category
   created_at: string
   updated_at: string

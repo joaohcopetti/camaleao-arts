@@ -74,6 +74,9 @@ onMounted(() => {
       </span>
     </div>
 
-    <InputFooter :error="errorMessage" :hint="hint" />
+    <InputFooter
+      :error="errorMessage"
+      :hint="hint"
+    />
   </label>
 </template>

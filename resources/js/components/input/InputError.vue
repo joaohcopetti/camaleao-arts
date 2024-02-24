@@ -11,7 +11,10 @@ const show = computed(() => !!props.error)
 </script>
 
 <template>
-  <span v-if="show" class="label-text-alt text-error font-semibold">
+  <span
+    v-if="show"
+    class="label-text-alt text-error font-semibold"
+  >
     {{ error }}
   </span>
 </template>

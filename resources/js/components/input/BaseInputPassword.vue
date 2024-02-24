@@ -38,7 +38,11 @@ defineOptions({
 
 <template>
   <div class="join w-full">
-    <BaseInput ref="input" class="join-item" v-bind="baseInputProps" />
+    <BaseInput
+      ref="input"
+      class="join-item"
+      v-bind="baseInputProps"
+    />
     <AppButton
       class="join-item border border-base-content/20 no-animation"
       type="button"

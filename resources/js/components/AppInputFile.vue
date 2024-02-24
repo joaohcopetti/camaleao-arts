@@ -62,7 +62,10 @@ const onInput = (event: Event) => {
     />
 
     <div class="label flex-col items-start">
-      <InputFooter :error="errorMessage" :hint="hint" />
+      <InputFooter
+        :error="errorMessage"
+        :hint="hint"
+      />
     </div>
   </label>
 </template>

@@ -60,11 +60,15 @@ const onInput = (event: Event) => {
 </script>
 
 <template>
-  <Combobox v-model="modelValue" class="w-full">
+  <Combobox
+    v-model="modelValue"
+    class="w-full"
+  >
     <div class="static mt-1">
       <ComboboxButton class="w-full cursor-default">
         <InputLabel v-if="label"> {{ label }}</InputLabel>
         <ComboboxInput
+          autocomplete="off"
           :name="name"
           :placeholder="placeholder"
           class="input input-bordered input-primary w-full"
@@ -74,15 +78,18 @@ const onInput = (event: Event) => {
           :display-value="(item: any) => (item ? item[displayProp] : '')"
           @change="onInput"
         />
-        <InputFooter :hint="hint" :error="errorMessage" />
+        <InputFooter
+          :hint="hint"
+          :error="errorMessage"
+        />
       </ComboboxButton>
 
       <ComboboxOptions
-        class="fixed mt-1 max-h-60 w-72 overflow-auto rounded-md bg-base-100 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+        class="absolute mt-1 max-h-60 w-72 overflow-auto rounded-md bg-base-100 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
       >
         <div
           v-if="computedItems.length === 0 && query !== ''"
-          class="relative cursor-default select-none px-4 py-2 text-gray-700"
+          class="relative cursor-default select-none px-4 py-2"
         >
           Nenhum item encontrado
         </div>

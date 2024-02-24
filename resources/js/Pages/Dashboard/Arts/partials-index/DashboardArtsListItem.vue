@@ -10,8 +10,13 @@ defineProps<{
 <template>
   <div class="grid grid-cols-[1fr_3fr]">
     <div class="">
-      <img class="rounded shadow" :src="art.image_filepath" alt="" />
+      <img
+        class="rounded shadow"
+        :src="art.image_url"
+        alt=""
+      />
     </div>
+
     <div class="flex flex-col justify-between mx-5">
       <div class="flex flex-col gap-2">
         <div class="text-xl font-bold">{{ art.name }}</div>
@@ -35,7 +40,7 @@ defineProps<{
         />
         <AppButton
           as="a"
-          :href="art.filepath_download_url"
+          :href="art.file_download_url"
           label="Projeto"
           class="btn-sm"
           icon="fas fa-download"

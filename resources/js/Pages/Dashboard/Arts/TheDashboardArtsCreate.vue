@@ -25,7 +25,10 @@ const onBackClick = () => {
 
     <AppCard>
       <template #title>
-        <FWIcon icon="fas fa-plus" fixed-width />
+        <FWIcon
+          icon="fas fa-plus"
+          fixed-width
+        />
         Cadastre uma nova arte
       </template>
       <template #body>
