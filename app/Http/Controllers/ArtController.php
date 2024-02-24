@@ -6,12 +6,15 @@ use App\Models\Art;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Inertia\Inertia;
 
 class ArtController extends Controller
 {
     public function index()
     {
-        return 'index';
+        return Inertia::render('Art/TheArt', [
+            'arts' => Art::latest()->paginate()
+        ]);
     }
 
     public function getImage(string $filename)

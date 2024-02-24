@@ -33,12 +33,8 @@ const props = withDefaults(defineProps<AppComboboxProps>(), {
 const modelValue = defineModel<any>()
 const query = ref('')
 
-const computedItems = computed(() => {
-  if (!props.filterBy) {
-    return props.items
-  }
-
-  return query.value === ''
+const computedItems = computed(() =>
+  query.value === ''
     ? props.items
     : props.items.filter((item: any) =>
         item[props.filterBy]
@@ -46,7 +42,7 @@ const computedItems = computed(() => {
           .replace(/\s+/g, '')
           .includes(query.value.toLowerCase().replace(/\s+/g, ''))
       )
-})
+)
 
 const onInput = (event: Event) => {
   const target = event.target as HTMLInputElement
@@ -67,17 +63,31 @@ const onInput = (event: Event) => {
     <div class="static mt-1">
       <ComboboxButton class="w-full cursor-default">
         <InputLabel v-if="label"> {{ label }}</InputLabel>
-        <ComboboxInput
-          autocomplete="off"
-          :name="name"
-          :placeholder="placeholder"
-          class="input input-bordered input-primary w-full"
-          :class="{
-            'input-error': errorMessage
-          }"
-          :display-value="(item: any) => (item ? item[displayProp] : '')"
-          @change="onInput"
-        />
+        <label class="input input-bordered focus-within:input-primary flex items-center gap-2 pr-0">
+          <ComboboxInput
+            autocomplete="off"
+            :name="name"
+            :placeholder="placeholder"
+            class="w-full grow"
+            :class="{
+              'input-error': errorMessage
+            }"
+            :display-value="(item: any) => (item ? item[displayProp] : '')"
+            @change="onInput"
+          />
+          <div
+            class="h-full items-center flex px-3 group cursor-pointer"
+            @click.prevent="modelValue = null"
+          >
+            <FWIcon
+              v-if="modelValue"
+              icon="fas fa-times"
+              fixed-width
+              class="opacity-70 group-hover:opacity-100"
+              @click="modelValue = null"
+            />
+          </div>
+        </label>
         <InputFooter
           :hint="hint"
           :error="errorMessage"
