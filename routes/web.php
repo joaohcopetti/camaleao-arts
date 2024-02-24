@@ -4,6 +4,7 @@ use App\Http\Controllers\ArtController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\DashboardArtController;
 use App\Http\Controllers\HomeController;
+use App\Models\Permission;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -39,7 +40,7 @@ Route::name('images.')->group(function () {
 
 Route::name('dashboard.')
     ->prefix('painel')
-    ->middleware(['auth', 'can:access_admin_panel'])
+    ->middleware(['auth', 'can:' . Permission::ACCESS_ADMIN_PANEL])
     ->group(function () {
         Route::get('/artes', [DashboardArtController::class, 'index'])->name('arts.index');
         Route::get('/artes/nova', [DashboardArtController::class, 'create'])->name('arts.create');

@@ -21,10 +21,10 @@ const onCreateClick = () => {
   <DashboardLayout>
     <template #header>
       <AppButton
-        @click.prevent="onCreateClick"
         icon="fas fa-plus"
         label="Nova arte"
         class="btn-success"
+        @click.prevent="onCreateClick"
       />
     </template>
 

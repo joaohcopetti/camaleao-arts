@@ -32,7 +32,7 @@ const onInput = (event: Event) => {
 }
 
 defineExpose({
-  focusInput,
+  focusInput
 })
 </script>
 

@@ -18,14 +18,14 @@ const form = useForm({
       :error-message="form.errors.email"
     />
     <AppInput
-      class="mb-5"
       v-model="form.password"
+      class="mb-5"
       placeholder="Digite sua senha..."
       type="password"
       label="Senha"
       name="password"
       :error-message="form.errors.password"
     />
-    <AppButton label="Entrar" class="w-full btn-primary" />
+    <AppButton :loading="form.processing" label="Entrar" class="w-full btn-primary" />
   </AppForm>
 </template>

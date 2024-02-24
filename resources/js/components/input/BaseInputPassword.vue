@@ -11,7 +11,7 @@ const baseInputProps = computed(() => ({
   ...props,
   ...attrs,
   class: attrs.class,
-  type: dynamicType.value,
+  type: dynamicType.value
 }))
 
 const dynamicType = ref(props.type)
@@ -19,7 +19,7 @@ const dynamicType = ref(props.type)
 const isDynamicTypePassword = computed(() => dynamicType.value === 'password')
 
 const passwordIcon = computed(() =>
-  isDynamicTypePassword.value ? 'far fa-eye-slash' : 'far fa-eye',
+  isDynamicTypePassword.value ? 'far fa-eye-slash' : 'far fa-eye'
 )
 
 const togglePassword = () => {
@@ -32,17 +32,13 @@ const togglePassword = () => {
 }
 
 defineOptions({
-  inheritAttrs: false,
+  inheritAttrs: false
 })
 </script>
 
 <template>
   <div class="join w-full">
-    <BaseInput
-      ref="input"
-      class="join-item"
-      v-bind="baseInputProps"
-    />
+    <BaseInput ref="input" class="join-item" v-bind="baseInputProps" />
     <AppButton
       class="join-item border border-base-content/20 no-animation"
       type="button"

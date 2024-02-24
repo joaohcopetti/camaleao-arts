@@ -1,71 +1,122 @@
 <script setup lang="ts">
-import { Combobox } from '@headlessui/vue'
-import ComboboxCustomInput from './ComboboxCustomInput.vue'
-import ComboboxCustomOptions from './ComboboxCustomOptions.vue'
-import { AppComboboxProps } from '@/types/components'
-import { computed, ref } from 'vue'
+import { ref, computed } from 'vue'
+import {
+  Combobox,
+  ComboboxInput,
+  ComboboxButton,
+  ComboboxOptions,
+  ComboboxOption
+} from '@headlessui/vue'
+import InputLabel from '../input/InputLabel.vue'
+import InputFooter from '../input/InputFooter.vue'
 
-const emit = defineEmits(['update:modelValue'])
+type AppComboboxProps = {
+  name: string
+  by?: string
+  placeholder?: string
+  label?: string
+  filterBy: string
+  items: { [prop: string]: any }[]
+  displayProp: string
+  errorMessage?: string
+  hint?: string
+}
+
 const props = withDefaults(defineProps<AppComboboxProps>(), {
   by: 'id',
-  loading: false
+  placeholder: undefined,
+  label: undefined,
+  errorMessage: undefined,
+  hint: undefined
 })
 
-const filterItem = (item: any) =>
-  item[props.searchProp!].toLowerCase().includes(search.value.toLowerCase())
+const modelValue = defineModel<any>()
+const query = ref('')
 
-const search = ref('')
-const computedItems = computed(() =>
-  props.searchProp ? props.items.filter(filterItem) : props.items
-)
+const computedItems = computed(() => {
+  if (!props.filterBy) {
+    return props.items
+  }
 
-const onSearch = (event: Event) => {
+  return query.value === ''
+    ? props.items
+    : props.items.filter((item: any) =>
+        item[props.filterBy]
+          .toLowerCase()
+          .replace(/\s+/g, '')
+          .includes(query.value.toLowerCase().replace(/\s+/g, ''))
+      )
+})
+
+const onInput = (event: Event) => {
   const target = event.target as HTMLInputElement
 
-  search.value = target.value
-}
-
-const onSelect = (value: any) => {
-  emit('update:modelValue', value)
-
-  if (value === null) {
-    search.value = ''
-    return
+  if (target.value === '') {
+    modelValue.value = null
   }
 
-  if (props.searchProp) {
-    search.value = value[props.searchProp]
-    return
-  }
-}
-
-const onRemoveSelected = () => {
-  search.value = ''
-  emit('update:modelValue', null)
+  query.value = target.value
 }
 </script>
 
 <template>
-  <Combobox as="div" :model-value="modelValue" :by="by" @update:model-value="onSelect">
-    <ComboboxCustomInput
-      v-bind="{
-        name,
-        modelValue,
-        placeholder,
-        label,
-        loading,
-        displayValue,
-        error,
-        errorMessage
-      }"
-      @remove-selected="onRemoveSelected"
-      @input="onSearch"
-    />
+  <Combobox v-model="modelValue" class="w-full">
+    <div class="static mt-1">
+      <ComboboxButton class="w-full cursor-default">
+        <InputLabel v-if="label"> {{ label }}</InputLabel>
+        <ComboboxInput
+          :name="name"
+          :placeholder="placeholder"
+          class="input input-bordered input-primary w-full"
+          :class="{
+            'input-error': errorMessage
+          }"
+          :display-value="(item: any) => (item ? item[displayProp] : '')"
+          @change="onInput"
+        />
+        <InputFooter :hint="hint" :error="errorMessage" />
+      </ComboboxButton>
 
-    <ComboboxCustomOptions :items="computedItems" :by="by">
-      <template #option="item">
-        <slot name="option" v-bind="item" />
-      </template>
-    </ComboboxCustomOptions>
+      <ComboboxOptions
+        class="fixed mt-1 max-h-60 w-72 overflow-auto rounded-md bg-base-100 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+      >
+        <div
+          v-if="computedItems.length === 0 && query !== ''"
+          class="relative cursor-default select-none px-4 py-2 text-gray-700"
+        >
+          Nenhum item encontrado
+        </div>
+
+        <ComboboxOption
+          v-for="item in computedItems"
+          :key="item[by]"
+          v-slot="{ selected, active }"
+          as="template"
+          :value="item"
+        >
+          <li
+            class="relative cursor-pointer select-none py-2 pl-10 pr-4"
+            :class="{
+              'bg-primary text-white': active,
+              'bg-base-100 text-base-content': !active
+            }"
+          >
+            <span
+              class="block truncate"
+              :class="{ 'font-medium': selected, 'font-normal': !selected }"
+            >
+              {{ item[displayProp] }}
+            </span>
+            <span
+              v-if="selected"
+              class="absolute inset-y-0 left-0 flex items-center pl-3"
+              :class="{ 'text-white': active, 'text-primary': !active }"
+            >
+              <FWIcon icon="fas fa-check" />
+            </span>
+          </li>
+        </ComboboxOption>
+      </ComboboxOptions>
+    </div>
   </Combobox>
 </template>

@@ -2,18 +2,20 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\SyncUserRolesAction;
 use App\Models\Permission;
 use App\Models\Role;
+use Error;
 use Illuminate\Console\Command;
 
-class SetupUserRolesCommand extends Command
+class SyncUserRolesCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'app:setup-roles';
+    protected $signature = 'app:sync-roles';
 
     /**
      * The console command description.
@@ -27,9 +29,12 @@ class SetupUserRolesCommand extends Command
      */
     public function handle()
     {
-        $role = Role::create(['name' => Role::ADMIN]);
-        $permission = Permission::create(['name' => Permission::ACCESS_ADMIN_PANEL]);
+        try {
+            SyncUserRolesAction::execute();
+        } catch (Error $e) {
+            $this->error($e->getMessage());
+        }
 
-        $role->givePermissionTo($permission);
+        $this->info('Regras de usuários sincronizadas');
     }
 }

@@ -17,9 +17,9 @@ const onBackClick = () => {
     <template #header>
       <AppButton
         icon="fas fa-arrow-left"
-        @click.prevent="onBackClick"
         label="Voltar"
         class="btn-primary btn-outline"
+        @click.prevent="onBackClick"
       />
     </template>
 

@@ -6,15 +6,15 @@ import type { AppFormProps } from '@/types/components'
 const emit = defineEmits(['success', 'error'])
 const props = withDefaults(defineProps<AppFormProps>(), {
   method: 'post',
-  transformedData: () => ({}),
+  transformedData: () => ({})
 })
 
 const transformedForm = computed(() =>
   props.form.transform((data) => ({
     _method: props.method,
     ...data,
-    ...props.transformedData(),
-  })),
+    ...props.transformedData()
+  }))
 )
 
 const submit = (options?: Partial<VisitOptions>) => {
@@ -28,7 +28,7 @@ const onSubmit = () => {
     },
     onError() {
       emit('error')
-    },
+    }
   })
 }
 
@@ -40,10 +40,7 @@ const onFocus = (event: Event) => {
 </script>
 
 <template>
-  <form
-    @submit.prevent="onSubmit"
-    @focus.capture="onFocus"
-  >
+  <form @submit.prevent="onSubmit" @focus.capture="onFocus">
     <slot />
 
     <slot name="footer" />

@@ -6,8 +6,8 @@ module.exports = {
   env: {
     node: true
   },
-  'extends': [
-    'plugin:vue/vue3-essential',
+  extends: [
+    'plugin:vue/vue3-recommended',
     'eslint:recommended',
     '@vue/eslint-config-typescript',
     '@vue/eslint-config-prettier/skip-formatting'
@@ -18,9 +18,6 @@ module.exports = {
   rules: {
     'no-duplicate-imports': ['warn'],
     'vue/padding-line-between-blocks': ['error'],
-    'vue/html-self-closing': [
-      'error',
-      { html: { component: 'always', void: 'always' } },
-    ],
-  },
+    'vue/html-self-closing': ['error', { html: { component: 'always', void: 'always' } }]
+  }
 }

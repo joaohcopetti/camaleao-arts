@@ -11,10 +11,10 @@ return new class () extends Migration {
     public function up(): void
     {
         Schema::create('arts', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('filepath');
-            $table->foreignId('category_id')
+            $table->foreignUuid('category_id')
                 ->nullable()
                 ->constrained('categories')
                 ->nullOnDelete();
