@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ArtResource;
 use App\Models\Art;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,7 +14,7 @@ class ArtController extends Controller
     public function index()
     {
         return Inertia::render('Art/TheArt', [
-            'arts' => Art::latest()->paginate()
+            'arts' => ArtResource::collection(Art::latest()->paginate())
         ]);
     }
 

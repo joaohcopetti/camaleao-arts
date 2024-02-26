@@ -12,8 +12,6 @@ class HomeController extends Controller
 {
     public function __invoke()
     {
-        return Inertia::render('Home/TheHome', [
-            'categories' => CategoryResource::collection(Category::all())
-        ]);
+        return Inertia::render('Home/TheHome');
     }
 }

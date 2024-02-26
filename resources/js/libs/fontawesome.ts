@@ -3,6 +3,7 @@ import { faEye } from '@fortawesome/free-regular-svg-icons/faEye'
 import { faEyeSlash } from '@fortawesome/free-regular-svg-icons/faEyeSlash'
 import {
   faArrowLeft,
+  faBars,
   faCheck,
   faDownload,
   faPlus,
@@ -20,5 +21,6 @@ library.add(
   faArrowLeft,
   faDownload,
   faUserCircle,
-  faCheck
+  faCheck,
+  faBars
 )

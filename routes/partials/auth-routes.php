@@ -3,7 +3,13 @@
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use Illuminate\Support\Facades\Route;
 
-Route::name('auth.')->middleware('guest')->group(function () {
-    Route::get('/entrar', [AuthenticatedSessionController::class, 'create'])->name('create');
-    Route::post('/entrar', [AuthenticatedSessionController::class, 'store'])->name('store');
+Route::name('auth.')->group(function () {
+    Route::middleware('guest')->group(function () {
+        Route::get('/entrar', [AuthenticatedSessionController::class, 'create'])->name('create');
+        Route::post('/entrar', [AuthenticatedSessionController::class, 'store'])->name('store');
+    });
+
+    Route::middleware('auth')->group(function () {
+        Route::post('/sair', [AuthenticatedSessionController::class, 'destroy'])->name('destroy');
+    });
 });

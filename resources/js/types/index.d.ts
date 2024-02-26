@@ -8,6 +8,7 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
   auth: {
     user: User
   }
+  categories: Category[]
 }
 
 export type PaginationLink = {
