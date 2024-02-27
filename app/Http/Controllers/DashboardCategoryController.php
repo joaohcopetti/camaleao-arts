@@ -28,7 +28,7 @@ class DashboardCategoryController extends Controller
 
         $category->update(['name' => $request->name]);
 
-        return redirect()->back();
+        return redirect()->route('dashboard.categories.index');
     }
 
     public function destroy(Category $category)
