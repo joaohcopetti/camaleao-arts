@@ -1,5 +1,14 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const modal = ref(false)
+</script>
+
 <template>
   <div>
-    <h1>Home</h1>
+    <AppButton
+      label="Modal"
+      @click="modal = true"
+    />
   </div>
 </template>

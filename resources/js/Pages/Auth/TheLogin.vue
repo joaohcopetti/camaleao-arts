@@ -3,7 +3,7 @@ import LoginForm from './LoginForm.vue'
 </script>
 
 <template>
-  <div class="flex justify-center items-center h-full -mt-10">
+  <div class="flex justify-center mt-20">
     <div class="p-4 bg-base-100 w-3/12 rounded-lg shadow-lg">
       <div class="text-center my-5">
         <FWIcon

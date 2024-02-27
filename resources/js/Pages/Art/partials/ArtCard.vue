@@ -19,6 +19,7 @@ defineProps<ArtCardProps>()
     </div>
     <div class="p-3 flex flex-col gap-3">
       <span class="font-bold">{{ art.name }}</span>
+      <span class="badge badge-sm badge-primary">{{ art.category.name }}</span>
       <span class="text-sm">
         {{
           DateTime.fromISO(art.created_at).toLocaleString({

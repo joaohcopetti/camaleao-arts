@@ -15,7 +15,7 @@ const routeStore = useRouteStore()
       <Link
         :href="route('arts.index')"
         :class="{
-          'btn-active font-bold': routeStore.isCurrent('arts.index')
+          'btn-active font-bold': routeStore.isCurrent('arts.*')
         }"
       >
         Artes

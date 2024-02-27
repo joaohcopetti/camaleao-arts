@@ -33,15 +33,15 @@ defineProps<{
       <div class="flex gap-4">
         <AppButton
           as="a"
-          :href="art.image_download_url"
-          label="Imagem"
+          :href="art.file_download_url"
+          label="Projeto"
           class="btn-sm"
           icon="fas fa-download"
         />
         <AppButton
           as="a"
-          :href="art.file_download_url"
-          label="Projeto"
+          :href="art.image_download_url"
+          label="Imagem"
           class="btn-sm"
           icon="fas fa-download"
         />

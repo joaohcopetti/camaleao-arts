@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useUserStore } from '@/store/user-store'
-import { router } from '@inertiajs/vue3'
-
+import { router, Link } from '@inertiajs/vue3'
 const userStore = useUserStore()
 
 const onLogoutClick = () => {
@@ -29,6 +28,7 @@ const onLogoutClick = () => {
       <li>
         <a> Minha conta </a>
       </li>
+      <li><Link :href="route('dashboard.arts.index')">Painel</Link></li>
       <li><span @click.prevent="onLogoutClick">Sair</span></li>
     </ul>
   </div>
