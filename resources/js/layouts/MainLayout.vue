@@ -1,11 +1,9 @@
 <script setup lang="ts">
-import { useRouteStore } from '@/store/route-store'
-
-const routeStore = useRouteStore()
+import MainNavbar from '@/components/navbar/MainNavbar.vue'
 </script>
 
 <template>
-  <AppNavbar />
+  <MainNavbar />
   <div class="h-full px-10">
     <div class="mt-10 h-full">
       <slot />

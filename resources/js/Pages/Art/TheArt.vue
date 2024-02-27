@@ -12,12 +12,21 @@ defineProps<TheArtProps>()
 <template>
   <AppCard>
     <template #body>
-      <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+      <div
+        v-if="arts.data.length"
+        class="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5"
+      >
         <ArtCard
           v-for="art in arts.data"
           :key="art.id"
           :art="art"
         />
+      </div>
+      <div
+        v-else
+        class="text-center my-20"
+      >
+        Nenhuma arte encontrada
       </div>
     </template>
   </AppCard>

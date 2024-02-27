@@ -1,38 +1,49 @@
 <script setup lang="ts">
 import { useRouteStore } from '@/store/route-store'
 import { Category } from '@/types'
-import { Link } from '@inertiajs/vue3'
-defineProps<{ categories: Category[] }>()
+import { Link, usePage } from '@inertiajs/vue3'
+import { computed } from 'vue'
 
 const routeStore = useRouteStore()
+const categories = computed<Category[]>(() => usePage().props.categories)
+
+const categoryItems = computed(() => {
+  return categories.value.map((category) => ({
+    label: category.name,
+    as: Link,
+    props: {
+      class: [
+        'capitalize',
+        { 'bg-base-300': routeStore.isCurrent('categories.show', { category: category.slug }) }
+      ],
+      href: route('categories.show', { category: category.slug })
+    }
+  }))
+})
 </script>
 
 <template>
-  <ul
-    class="menu menu-sm sm:menu-md w-52 sm:w-auto rounded-box bg-base-100 sm:menu-horizontal dropdown-content mt-3 sm:mt-0 z-[1] p-2 sm:p-0 px-1 gap-0 sm:gap-2"
-  >
-    <li>
-      <Link
-        :href="route('arts.index')"
-        :class="{
-          'btn-active font-bold': routeStore.isCurrent('arts.*')
-        }"
-      >
-        Artes
-      </Link>
-    </li>
-    <li>
-      <details>
-        <summary>Categorias</summary>
-        <ul class="p-2">
-          <li
-            v-for="category in categories"
-            :key="category.id"
-          >
-            <a>{{ category.name }}</a>
-          </li>
-        </ul>
-      </details>
-    </li>
-  </ul>
+  <div class="flex gap-2">
+    <Link
+      :href="route('arts.index')"
+      class="btn btn-ghost"
+      :class="{
+        'btn-active font-bold': routeStore.isCurrent('arts.*')
+      }"
+    >
+      Artes
+    </Link>
+    <AppDropdown
+      :items="categoryItems"
+      chevron
+      :trigger-class="[
+        'btn btn-ghost',
+        {
+          'btn-active': routeStore.isCurrent('categories.*')
+        }
+      ]"
+    >
+      <template #trigger> Categorias </template>
+    </AppDropdown>
+  </div>
 </template>

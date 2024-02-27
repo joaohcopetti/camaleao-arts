@@ -15,14 +15,14 @@ class DashboardArtController extends Controller
 {
     public function index()
     {
-        return Inertia::render('Dashboard/Arts/TheDashboardArts', [
+        return Inertia::render('Dashboard/Art/TheDashboardArts', [
             'arts' => ArtResource::collection(Art::latest()->paginate())
         ]);
     }
 
     public function create()
     {
-        return Inertia::render('Dashboard/Arts/TheDashboardArtsCreate', [
+        return Inertia::render('Dashboard/Art/TheDashboardArtsCreate', [
             'categories' =>  Category::orderBy('name')->get()
         ]);
     }
@@ -48,5 +48,27 @@ class DashboardArtController extends Controller
         StoreCorelAsImageAction::execute($filepath);
 
         return $filepath;
+    }
+
+    public function edit(Art $art)
+    {
+        return Inertia::render('Dashboard/Art/TheDashboardArtsEdit', [
+            'art' => new ArtResource($art)
+        ]);
+    }
+
+    public function update(DashboardArtRequest $request, Art $art)
+    {
+        $art->name = $request->name;
+        $art->category()->associate($request->category);
+
+        if ($request->file) {
+            $art->deleteFile();
+            $art->filepath = $this->storeImage($request->file);
+        }
+
+        $art->save();
+
+        return redirect()->route('dashboard.arts.index');
     }
 }

@@ -36,11 +36,13 @@ export type Paginated<T> = {
 export interface Category {
   id: string
   name: string
+  slug: string
 }
 
 export interface Art {
   id: string
   name: string
+  slug: string
   image_url: string
   image_download_url: string
   file_download_url: string

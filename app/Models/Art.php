@@ -10,11 +10,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Art extends Model
 {
     use HasFactory;
     use HasUuids;
+    use HasSlug;
 
     protected $table = 'arts';
     protected $fillable = [
@@ -23,6 +26,18 @@ class Art extends Model
     ];
 
     public static $STORAGE_PATH = 'artes';
+
+    public function getSlugOptions(): SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
+
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     public function category(): BelongsTo
     {
@@ -41,5 +56,15 @@ class Art extends Model
         return Attribute::make(
             get: fn () => pathinfo($this->filepath, PATHINFO_FILENAME) . '.png'
         );
+    }
+
+    public function deleteFile()
+    {
+        $path = static::$STORAGE_PATH . '/';
+
+        return Storage::delete([
+            $path . $this->filename,
+            $path . $this->imageFilename
+        ]);
     }
 }

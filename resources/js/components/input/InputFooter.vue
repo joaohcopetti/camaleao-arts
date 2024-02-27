@@ -4,7 +4,7 @@ import InputHint from './InputHint.vue'
 
 interface InputFooterProps {
   error?: string
-  hint?: string
+  hint?: string | string[]
 }
 
 defineProps<InputFooterProps>()
@@ -13,6 +13,16 @@ defineProps<InputFooterProps>()
 <template>
   <div class="label flex-col items-start">
     <InputError :error="error" />
-    <InputHint :hint="hint" />
+    <template v-if="Array.isArray(hint)">
+      <InputHint
+        v-for="h in hint"
+        :key="h"
+        :hint="h"
+      />
+    </template>
+    <InputHint
+      v-else
+      :hint="hint"
+    />
   </div>
 </template>

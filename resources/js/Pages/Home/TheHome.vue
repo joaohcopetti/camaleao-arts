@@ -2,13 +2,13 @@
 import { ref } from 'vue'
 
 const modal = ref(false)
+const items = [{ label: 'Edit' }, { label: 'Delete' }]
 </script>
 
 <template>
   <div>
-    <AppButton
-      label="Modal"
-      @click="modal = true"
-    />
+    <AppDropdown :items="items">
+      <template #trigger>asd </template>
+    </AppDropdown>
   </div>
 </template>

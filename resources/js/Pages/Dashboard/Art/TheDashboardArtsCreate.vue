@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { router } from '@inertiajs/vue3'
-import ArtsCreateForm from './partials-create/ArtsCreateForm.vue'
+import ArtsForm from './partials/ArtsForm.vue'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 
 defineProps<{
@@ -32,7 +32,7 @@ const onBackClick = () => {
         Cadastre uma nova arte
       </template>
       <template #body>
-        <ArtsCreateForm :categories="categories" />
+        <ArtsForm :categories="categories" />
       </template>
     </AppCard>
   </DashboardLayout>

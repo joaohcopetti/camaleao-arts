@@ -1,15 +1,25 @@
 <script setup lang="ts">
 import type { Art } from '@/types'
+import { Link } from '@inertiajs/vue3'
 import { DateTime } from 'luxon'
 
-defineProps<{
+const props = defineProps<{
   art: Art
 }>()
+
+const dropdownItems = [
+  {
+    label: 'Editar',
+    as: Link,
+    props: { href: route('dashboard.arts.edit', { art: props.art.slug }) }
+  },
+  { label: 'Excluir', as: Link, props: { href: '' } }
+]
 </script>
 
 <template>
-  <div class="grid grid-cols-[1fr_3fr]">
-    <div class="">
+  <div class="grid grid-cols-[1fr_3fr] relative">
+    <div>
       <img
         class="rounded shadow"
         :src="art.image_url"
@@ -18,11 +28,22 @@ defineProps<{
     </div>
 
     <div class="flex flex-col justify-between mx-5">
+      <div class="absolute top-0 right-0">
+        <AppDropdown
+          :items="dropdownItems"
+          trigger-class="btn btn-sm btn-ghost rounded-full w-8 h-8"
+        >
+          <template #trigger>
+            <FWIcon icon="fas fa-ellipsis" />
+          </template>
+        </AppDropdown>
+      </div>
+
       <div class="flex flex-col gap-2">
         <div class="text-xl font-bold">{{ art.name }}</div>
 
         <div>
-          <span class="badge badge-primary badge-sm"> {{ art.category.name }}</span>
+          <span class="badge badge-primary badge-sm"> {{ art.category?.name }}</span>
         </div>
 
         <div class="text-sm">

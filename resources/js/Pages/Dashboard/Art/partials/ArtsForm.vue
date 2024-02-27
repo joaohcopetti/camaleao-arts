@@ -1,32 +1,56 @@
 <script setup lang="ts">
-import { Category } from '@/types'
+import { Art, Category } from '@/types'
 import { useForm } from '@inertiajs/vue3'
+import { computed } from 'vue'
+import { onMounted } from 'vue'
 
 type ArtsCreateForm = {
   name: string
   file?: File
-  category: string
+  category?: Category
 }
 
-defineProps<{
+const props = defineProps<{
+  art?: Art
   categories: object[]
 }>()
 
 const form = useForm<ArtsCreateForm>({
   name: '',
   file: undefined,
-  category: ''
+  category: undefined
 })
+
+const isEdit = computed(() => props.art)
+const endpoint = computed(() =>
+  isEdit.value
+    ? route('dashboard.arts.update', { art: props.art!.slug })
+    : route('dashboard.arts.store')
+)
 
 const onInputFile = (file: File | undefined) => {
   form.file = file
 }
+
+const populateForm = () => {
+  if (!props.art) {
+    return
+  }
+
+  form.name = props.art.name
+  form.category = props.art.category
+}
+
+onMounted(() => {
+  populateForm()
+})
 </script>
 
 <template>
   <AppForm
     :form="form"
-    :endpoint="route('dashboard.arts.store')"
+    :endpoint="endpoint"
+    :method="isEdit ? 'patch' : 'post'"
   >
     <AppInput
       v-model="form.name"
@@ -39,7 +63,7 @@ const onInputFile = (file: File | undefined) => {
     <AppInputFile
       label="Arquivo da arte"
       name="file"
-      hint="Tipos aceitos: .cdr"
+      :hint="['Tipos aceitos: .cdr', isEdit && 'Deixe em branco caso não queira alterar a arte']"
       :error-message="form.errors.file"
       accept=".cdr"
       @change="onInputFile"
@@ -61,7 +85,7 @@ const onInputFile = (file: File | undefined) => {
       <AppButton
         :loading="form.processing"
         class="btn-success btn-outline w-full"
-        label="Cadastrar"
+        :label="isEdit ? 'Atualizar' : 'Cadastrar'"
       />
     </div>
   </AppForm>

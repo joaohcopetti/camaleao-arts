@@ -5,22 +5,12 @@ import NavbarUserItems from './NavbarUserItems.vue'
 import { computed } from 'vue'
 import { useUserStore } from '@/store/user-store'
 
-const categories = computed(() => usePage().props.categories)
 const userStore = useUserStore()
 </script>
 
 <template>
   <div class="navbar bg-base-100">
     <div class="navbar-start">
-      <div class="dropdown">
-        <AppButton
-          role="button"
-          class="btn-ghost lg:hidden"
-          icon="fas fa-bars"
-        />
-
-        <NavbarItems :categories="categories" />
-      </div>
       <Link
         class="btn btn-ghost text-xl"
         :href="route('home')"
@@ -32,7 +22,7 @@ const userStore = useUserStore()
       v-if="userStore.hasPermission('ACCESS_ARTS')"
       class="navbar-center hidden lg:flex"
     >
-      <NavbarItems :categories="categories" />
+      <NavbarItems />
     </div>
     <div class="navbar-end">
       <NavbarUserItems v-if="userStore.isAuth" />

@@ -7,7 +7,7 @@ interface AppInputFileProps {
   label?: string
   name: string
   errorMessage?: string
-  hint?: string
+  hint?: string | string[]
   multiple?: boolean
   value?: File | null
 }

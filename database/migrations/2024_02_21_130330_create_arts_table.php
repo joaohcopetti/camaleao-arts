@@ -13,6 +13,7 @@ return new class () extends Migration {
         Schema::create('arts', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->string('name');
+            $table->string('slug')->unique();
             $table->string('filepath');
             $table->foreignUuid('category_id')
                 ->nullable()

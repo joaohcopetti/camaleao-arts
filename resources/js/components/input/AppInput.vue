@@ -75,6 +75,7 @@ onMounted(() => {
     </div>
 
     <InputFooter
+      v-if="errorMessage || hint"
       :error="errorMessage"
       :hint="hint"
     />

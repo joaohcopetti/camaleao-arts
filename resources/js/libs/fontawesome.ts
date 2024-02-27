@@ -5,11 +5,21 @@ import {
   faArrowLeft,
   faBars,
   faCheck,
+  faChevronDown,
   faDownload,
+  faEdit,
+  faEllipsis,
+  faGauge,
+  faImage,
+  faList,
   faPlus,
+  faRightFromBracket,
   faSort,
   faTimes,
-  faUserCircle
+  faTrashAlt,
+  faUser,
+  faUserCircle,
+  faUsers
 } from '@fortawesome/free-solid-svg-icons'
 
 library.add(
@@ -22,5 +32,15 @@ library.add(
   faDownload,
   faUserCircle,
   faCheck,
-  faBars
+  faBars,
+  faChevronDown,
+  faEllipsis,
+  faGauge,
+  faRightFromBracket,
+  faUsers,
+  faList,
+  faTrashAlt,
+  faEdit,
+  faTimes,
+  faCheck
 )
