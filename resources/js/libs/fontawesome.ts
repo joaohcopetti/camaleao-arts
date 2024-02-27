@@ -42,5 +42,6 @@ library.add(
   faTrashAlt,
   faEdit,
   faTimes,
-  faCheck
+  faCheck,
+  faImage
 )
