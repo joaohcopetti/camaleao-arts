@@ -1,11 +1,7 @@
 <script setup lang="ts">
-import { Link, router } from '@inertiajs/vue3'
-import ArtsForm from './partials/ArtsForm.vue'
+import { Link } from '@inertiajs/vue3'
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
-
-defineProps<{
-  categories: object[]
-}>()
+import SubscribersForm from './partials/SubscribersForm.vue'
 </script>
 
 <template>
@@ -13,23 +9,15 @@ defineProps<{
     <template #action-button>
       <AppButton
         :as="Link"
+        :href="route('dashboard.subscribers.index')"
         icon="fas fa-arrow-left"
         label="Voltar"
         class="btn-primary btn-outline"
-        :href="route('dashboard.arts.index')"
       />
     </template>
-
     <AppCard>
-      <template #title>
-        <FWIcon
-          icon="fas fa-plus"
-          fixed-width
-        />
-        Cadastre uma nova arte
-      </template>
       <template #body>
-        <ArtsForm :categories="categories" />
+        <SubscribersForm />
       </template>
     </AppCard>
   </DashboardLayout>

@@ -22,4 +22,7 @@ Route::name('dashboard.')
         Route::delete('/categorias/{category}', [DashboardCategoryController::class, 'destroy'])->name('categories.destroy');
 
         Route::get('/assinantes', [DashboardSubscriberController::class, 'index'])->name('subscribers.index');
+        Route::get('/assinantes/novo', [DashboardSubscriberController::class, 'create'])->name('subscribers.create');
+        Route::post('/assinantes/novo', [DashboardSubscriberController::class, 'store'])->name('subscribers.store');
+        Route::get('/assinantes/{user}/editar', [DashboardSubscriberController::class, 'edit'])->name('subscribers.edit');
     });

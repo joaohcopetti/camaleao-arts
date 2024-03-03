@@ -83,6 +83,7 @@ onMounted(() => {
 
     <div class="mt-4">
       <AppButton
+        type="submit"
         :loading="form.processing"
         class="btn-success btn-outline w-full"
         :label="isEdit ? 'Atualizar' : 'Cadastrar'"

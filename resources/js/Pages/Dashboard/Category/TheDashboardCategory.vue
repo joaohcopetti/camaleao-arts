@@ -2,6 +2,7 @@
 import DashboardLayout from '@/layouts/DashboardLayout.vue'
 import DashboardCategoryList from './partials/DashboardCategoryList.vue'
 import { Category } from '@/types'
+import { Link } from '@inertiajs/vue3'
 
 defineProps<{
   categories: Category[]
