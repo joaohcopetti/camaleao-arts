@@ -93,7 +93,6 @@ const onInput = (event: Event) => {
           :error="errorMessage"
         />
       </ComboboxButton>
-
       <ComboboxOptions
         class="absolute mt-1 max-h-60 w-72 overflow-auto rounded-md bg-base-100 py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
       >
@@ -103,7 +102,6 @@ const onInput = (event: Event) => {
         >
           Nenhum item encontrado
         </div>
-
         <ComboboxOption
           v-for="item in computedItems"
           :key="item[by]"

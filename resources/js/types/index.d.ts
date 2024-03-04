@@ -2,6 +2,7 @@ export interface User {
   id: number
   name: string
   email: string
+  expire_at: string
   created_at: string
 }
 

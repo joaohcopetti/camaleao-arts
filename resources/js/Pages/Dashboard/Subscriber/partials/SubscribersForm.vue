@@ -1,18 +1,58 @@
 <script setup lang="ts">
+import { User } from '@/types'
 import { useForm } from '@inertiajs/vue3'
+import { onMounted, computed } from 'vue'
+import { DateTime } from 'luxon'
+const props = defineProps<{
+  user?: User
+}>()
 
 const form = useForm({
   name: '',
   email: '',
   password: '',
-  password_confirmation: ''
+  password_confirmation: '',
+  expire_at: ''
+})
+
+const isEdit = computed(() => !!props.user)
+
+const endpoint = computed(() =>
+  isEdit.value
+    ? route('dashboard.subscribers.update', { user: props.user })
+    : route('dashboard.subscribers.store')
+)
+
+const populateForm = () => {
+  if (!props.user) {
+    return
+  }
+
+  form.name = props.user.name
+  form.email = props.user.email
+  form.expire_at = DateTime.fromISO(props.user.expire_at).toFormat('dd/MM/y')
+}
+
+const transformedData = () => {
+  return {
+    ...form.data(),
+    expire_at: DateTime.fromFormat(form.expire_at, 'dd/MM/y').toISODate()
+  }
+}
+
+onMounted(() => {
+  if (isEdit.value) {
+    populateForm()
+  }
 })
 </script>
 
 <template>
   <AppForm
     :form="form"
-    :endpoint="route('dashboard.subscribers.store')"
+    :endpoint="endpoint"
+    :method="isEdit ? 'patch' : 'post'"
+    :transformed-data="transformedData"
   >
     <AppInput
       v-model="form.name"
@@ -34,9 +74,10 @@ const form = useForm({
     <AppInput
       v-model="form.password"
       name="password"
-      label="Senha"
+      :label="isEdit ? 'Nova senha' : 'Senha'"
       placeholder="Digite a senha..."
       type="password"
+      :hint="isEdit ? 'Apenas preencha caso queira alterar a senha' : undefined"
       :error-message="form.errors.password"
     />
 
@@ -48,10 +89,19 @@ const form = useForm({
       placeholder="Confirme a senha..."
     />
 
+    <AppInput
+      v-model="form.expire_at"
+      name="expire_at"
+      label="Expiração da assinatura"
+      placeholder="dd/mm/aaaa"
+      mask="##/##/####"
+      :error-message="form.errors.expire_at"
+    />
+
     <div class="mt-4">
       <AppButton
         type="submit"
-        label="Cadastrar"
+        :label="isEdit ? 'Atualizar' : 'Cadastrar'"
         class="btn-success btn-block btn-outline"
       />
     </div>

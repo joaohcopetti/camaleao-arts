@@ -23,11 +23,11 @@ withDefaults(defineProps<AppDropdownProps>(), {
 </script>
 
 <template>
-  <div class="w-fit text-right">
+  <div class="w-fit text-right relative">
     <Menu
       v-slot="{ open }"
       as="div"
-      class="relative inline-block text-left"
+      class="inline-block text-left"
     >
       <div>
         <MenuButton :class="triggerClass">

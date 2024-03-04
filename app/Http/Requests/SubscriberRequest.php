@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SubscriberRequest extends FormRequest
 {
@@ -21,11 +22,14 @@ class SubscriberRequest extends FormRequest
      */
     public function rules(): array
     {
+        $isEdit = request()->method() === 'PATCH';
+
         return [
             'name' => ['required'],
-            'email' => ['required', 'unique:users,email'],
-            'password' => ['required', 'confirmed'],
-            'password_confirmation' => ['required']
+            'email' => ['required', Rule::unique('users')->ignore(request()->user)],
+            'password' => $isEdit ? ['confirmed'] : ['required', 'confirmed'],
+            'password_confirmation' => $isEdit ? [] : ['required'],
+            'expire_at' => ['required', 'date']
         ];
     }
 }

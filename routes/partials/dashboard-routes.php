@@ -25,4 +25,5 @@ Route::name('dashboard.')
         Route::get('/assinantes/novo', [DashboardSubscriberController::class, 'create'])->name('subscribers.create');
         Route::post('/assinantes/novo', [DashboardSubscriberController::class, 'store'])->name('subscribers.store');
         Route::get('/assinantes/{user}/editar', [DashboardSubscriberController::class, 'edit'])->name('subscribers.edit');
+        Route::patch('/assinantes/{user}/editar', [DashboardSubscriberController::class, 'patch'])->name('subscribers.update');
     });

@@ -6,7 +6,12 @@ import { onMounted } from 'vue'
 const userStore = useUserStore()
 
 const userItems = [
-  { label: 'Minha conta', as: Link, props: { href: '' }, icon: 'fas fa-user-circle' },
+  {
+    label: 'Minha conta',
+    as: Link,
+    props: { href: route('users.account') },
+    icon: 'fas fa-user-circle'
+  },
   {
     label: 'Sair',
     as: 'button',

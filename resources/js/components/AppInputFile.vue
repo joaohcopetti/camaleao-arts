@@ -46,7 +46,7 @@ const onInput = (event: Event) => {
 </script>
 
 <template>
-  <label class="form-control">
+  <label class="form-control mb-4">
     <InputLabel v-if="label">
       {{ label }}
     </InputLabel>

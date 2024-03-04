@@ -22,6 +22,7 @@ class UserResource extends JsonResource
                 $this->has_roles,
                 $this->getAllPermissions()->pluck('name')
             ),
+            'expire_at' => $this->expire_at,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

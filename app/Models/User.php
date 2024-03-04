@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -29,6 +30,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'expire_at'
     ];
 
     /**
@@ -55,6 +57,17 @@ class User extends Authenticatable
     {
         return Attribute::make(
             get: fn () => !!$this->roles()->count()
+        );
+    }
+
+    public function hasValidSubscription(): Attribute
+    {
+        if (is_null($this->expire_at)) {
+            return true;
+        }
+
+        return Attribute::make(
+            get: fn () => Carbon::now()->lessThan($this->expire_at)
         );
     }
 }

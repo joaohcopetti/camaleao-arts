@@ -33,8 +33,21 @@ class DashboardSubscriberController extends Controller
         return redirect()->route('dashboard.subscribers.index');
     }
 
-    public function edit()
+    public function edit(User $user)
     {
-        return Inertia::render('Dashboard/Subscriber/TheSubscriberEdit');
+        return Inertia::render('Dashboard/Subscriber/TheSubscriberEdit', [
+            'user' => $user
+        ]);
+    }
+
+    public function patch(SubscriberRequest $request, User $user)
+    {
+        $user->update($request->except(['password']));
+
+        if ($request->filled('password')) {
+            $user->update(['password' => $request->password]);
+        }
+
+        return redirect()->route('dashboard.subscribers.index');
     }
 }
