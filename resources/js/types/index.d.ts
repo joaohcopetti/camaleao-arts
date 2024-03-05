@@ -4,6 +4,7 @@ export interface User {
   email: string
   expire_at: string
   created_at: string
+  has_valid_subscription: boolean
 }
 
 export type PageProps<T extends Record<string, unknown> = Record<string, unknown>> = T & {
@@ -13,26 +14,17 @@ export type PageProps<T extends Record<string, unknown> = Record<string, unknown
   categories: Category[]
 }
 
-export type PaginationLink = {
-  active: boolean
-  label: string
-  url: string | null
+export type PaginationLinks = {
+  first: string
+  last: string
+  next: string | null
+  prev: string | null
 }
 
 export type Paginated<T> = {
   data: T[]
-  links: PaginationLink[]
-  current_page: number
-  first_page_url: string
-  from: number
-  last_page: number
-  last_page_url: string
-  next_page_url: string | null
-  path: string
-  per_page: number
-  prev_page_url: string | null
-  to: number
-  total: number
+  links: PaginationLinks
+  meta: PaginationMeta
 }
 
 export interface Category {
@@ -51,4 +43,37 @@ export interface Art {
   category: Category
   created_at: string
   updated_at: string
+}
+
+export type PaginationLink = {
+  active: boolean
+  label: string
+  url: string | null
+}
+
+export interface AppPaginationProps {
+  pagination: PaginationLinks & PaginationMeta
+}
+
+type PaginationSimpleUrls = {
+  first: string
+  last: string
+  next: string | null
+  prev: string | null
+}
+
+export type PaginationMeta = {
+  current_page: number
+  from: number
+  last_page: number
+  links: PaginationLink[]
+  path: string
+  per_page: number
+  to: number
+  total: number
+}
+
+export type Pagination = {
+  links: PaginationSimpleUrls
+  meta: PaginationMeta
 }

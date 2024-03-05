@@ -29,7 +29,7 @@ class SubscriberRequest extends FormRequest
             'email' => ['required', Rule::unique('users')->ignore(request()->user)],
             'password' => $isEdit ? ['confirmed'] : ['required', 'confirmed'],
             'password_confirmation' => $isEdit ? [] : ['required'],
-            'expire_at' => ['required', 'date']
+            'expire_at' => ['required', 'date', 'after:' . now()->format('Y-m-d')]
         ];
     }
 }

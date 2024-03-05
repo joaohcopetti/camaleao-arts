@@ -22,7 +22,7 @@ class SyncUserRolesCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Command description';
+    protected $description = 'Sync the user roles';
 
     /**
      * Execute the console command.

@@ -64,6 +64,13 @@ const onDeleteBtnClick = () => {
             </template>
           </AppDropdown>
         </div>
+
+        <div
+          v-if="!user.has_valid_subscription"
+          class="text-center text-error mt-10 mb-5"
+        >
+          Sua assinatura expirou. Entre em contato para renova-la.
+        </div>
       </template>
     </AppCard>
   </div>

@@ -23,6 +23,7 @@ class UserResource extends JsonResource
                 $this->getAllPermissions()->pluck('name')
             ),
             'expire_at' => $this->expire_at,
+            'has_valid_subscription' => $this->hasValidSubscription,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at
         ];

@@ -3,6 +3,7 @@ import { User } from '@/types'
 import { useForm } from '@inertiajs/vue3'
 import { onMounted, computed } from 'vue'
 import { DateTime } from 'luxon'
+
 const props = defineProps<{
   user?: User
 }>()
@@ -12,7 +13,7 @@ const form = useForm({
   email: '',
   password: '',
   password_confirmation: '',
-  expire_at: ''
+  expire_at: DateTime.now().plus({ year: 1 }).toFormat('dd/MM/y')
 })
 
 const isEdit = computed(() => !!props.user)

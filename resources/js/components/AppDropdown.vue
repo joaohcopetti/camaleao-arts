@@ -14,6 +14,8 @@ type AppDropdownProps = {
   chevron?: boolean
 }
 
+defineEmits(['item-clicked'])
+
 withDefaults(defineProps<AppDropdownProps>(), {
   chevron: false,
   itemsAs: 'button',
@@ -27,22 +29,20 @@ withDefaults(defineProps<AppDropdownProps>(), {
     <Menu
       v-slot="{ open }"
       as="div"
-      class="inline-block text-left"
+      class="inline-block text-left w-full"
     >
-      <div>
-        <MenuButton :class="triggerClass">
-          <slot name="trigger" />
-          <FWIcon
-            v-if="chevron"
-            icon="fas fa-chevron-down"
-            class="transition-transform"
-            :class="{
-              'rotate-0': !open,
-              'rotate-180': open
-            }"
-          />
-        </MenuButton>
-      </div>
+      <MenuButton :class="triggerClass">
+        <slot name="trigger" />
+        <FWIcon
+          v-if="chevron"
+          icon="fas fa-chevron-down"
+          class="transition-transform"
+          :class="{
+            'rotate-0': !open,
+            'rotate-180': open
+          }"
+        />
+      </MenuButton>
 
       <Transition
         enter-active-class="transition duration-100 ease-out"
@@ -53,7 +53,7 @@ withDefaults(defineProps<AppDropdownProps>(), {
         leave-to-class="transform scale-95 opacity-0"
       >
         <MenuItems
-          class="absolute right-0 mt-2 w-56 origin-top-right divide-y rounded-md bg-base-100 shadow-lg ring-1 ring-black/5 focus:outline-none z-10"
+          class="absolute right-0 mt-2 md:w-56 origin-top-right divide-y rounded-md bg-base-100 shadow-lg ring-1 ring-black/5 focus:outline-none z-10 w-full"
         >
           <template v-if="!items">
             <MenuItem as="div">
@@ -76,7 +76,12 @@ withDefaults(defineProps<AppDropdownProps>(), {
                   active ? 'bg-base-200 text-white' : 'text-base-content',
                   'group flex w-full items-center rounded-md px-2 py-2 text-sm'
                 ]"
-                @click.capture="close"
+                @click.capture="
+                  () => {
+                    close()
+                    $emit('item-clicked')
+                  }
+                "
               >
                 <FWIcon
                   v-if="item.icon"

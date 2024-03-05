@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Art } from '@/types'
 import { DateTime } from 'luxon'
+import { Link } from '@inertiajs/vue3'
 type ArtCardProps = {
   art: Art
 }
@@ -9,7 +10,7 @@ defineProps<ArtCardProps>()
 </script>
 
 <template>
-  <div class="shadow-lg rounded-md w-60 bg-base-200 overflow-hidden">
+  <div class="shadow-lg rounded-md w-full bg-base-200 overflow-hidden">
     <div>
       <img
         class="w-full select-none"
@@ -19,7 +20,12 @@ defineProps<ArtCardProps>()
     </div>
     <div class="p-3 flex flex-col gap-3">
       <span class="font-bold">{{ art.name }}</span>
-      <span class="badge badge-sm badge-primary">{{ art.category?.name }}</span>
+      <Link
+        :href="route('categories.show', { category: art.category?.slug })"
+        class="badge badge-sm badge-primary"
+      >
+        {{ art.category?.name }}</Link
+      >
       <span class="text-sm">
         {{
           DateTime.fromISO(art.created_at).toLocaleString({

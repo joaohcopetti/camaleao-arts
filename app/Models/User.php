@@ -62,12 +62,10 @@ class User extends Authenticatable
 
     public function hasValidSubscription(): Attribute
     {
-        if (is_null($this->expire_at)) {
-            return true;
-        }
-
         return Attribute::make(
-            get: fn () => Carbon::now()->lessThan($this->expire_at)
+            get: fn () => $this->expire_at
+                ? Carbon::now()->lessThanOrEqualTo($this->expire_at)
+                : false
         );
     }
 }

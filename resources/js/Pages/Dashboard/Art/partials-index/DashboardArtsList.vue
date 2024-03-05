@@ -11,11 +11,19 @@ defineProps<DashboardListProps>()
 
 <template>
   <div>
-    <DashboardArtsListItem
-      v-for="art in arts"
-      :key="art.id"
-      class="last:mb-0 mb-10"
-      :art="art"
-    />
+    <div
+      v-if="!arts.length"
+      class="text-center my-20"
+    >
+      Nenhuma arte encontrada
+    </div>
+    <template v-else>
+      <DashboardArtsListItem
+        v-for="art in arts"
+        :key="art.id"
+        class="last:mb-0 mb-10"
+        :art="art"
+      />
+    </template>
   </div>
 </template>

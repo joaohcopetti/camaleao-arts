@@ -14,7 +14,7 @@ class CategoryController extends Controller
     {
         return Inertia::render('Category/TheCategory', [
             'category' => new CategoryResource($category),
-            'arts' => ArtResource::collection($category->arts()->paginate())
+            'arts' => ArtResource::collection($category->arts()->paginate(10))
         ]);
     }
 }

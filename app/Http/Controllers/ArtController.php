@@ -14,7 +14,7 @@ class ArtController extends Controller
     public function index()
     {
         return Inertia::render('Art/TheArt', [
-            'arts' => ArtResource::collection(Art::latest()->paginate())
+            'arts' => ArtResource::collection(Art::latest()->paginate(10))
         ]);
     }
 

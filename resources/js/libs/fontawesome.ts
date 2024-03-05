@@ -6,6 +6,8 @@ import {
   faBars,
   faCheck,
   faChevronDown,
+  faCircleLeft,
+  faCircleRight,
   faDownload,
   faEdit,
   faEllipsis,
@@ -17,7 +19,6 @@ import {
   faSort,
   faTimes,
   faTrashAlt,
-  faUser,
   faUserCircle,
   faUsers
 } from '@fortawesome/free-solid-svg-icons'
@@ -43,5 +44,7 @@ library.add(
   faEdit,
   faTimes,
   faCheck,
-  faImage
+  faImage,
+  faCircleLeft,
+  faCircleRight
 )

@@ -4,6 +4,7 @@ import { Category } from '@/types'
 import { Link, usePage } from '@inertiajs/vue3'
 import { computed } from 'vue'
 
+defineEmits(['item-clicked'])
 const routeStore = useRouteStore()
 const categories = computed<Category[]>(() => usePage().props.categories)
 
@@ -30,18 +31,21 @@ const categoryItems = computed(() => {
       :class="{
         'btn-active font-bold': routeStore.isCurrent('arts.*')
       }"
+      @click="$emit('item-clicked')"
     >
       Artes
     </Link>
     <AppDropdown
+      class="w-full"
       :items="categoryItems"
       chevron
       :trigger-class="[
-        'btn btn-ghost',
+        'btn btn-ghost w-full',
         {
-          'btn-active': routeStore.isCurrent('categories.*')
+          'md:btn-active': routeStore.isCurrent('categories.*')
         }
       ]"
+      @item-clicked="$emit('item-clicked')"
     >
       <template #trigger> Categorias </template>
     </AppDropdown>

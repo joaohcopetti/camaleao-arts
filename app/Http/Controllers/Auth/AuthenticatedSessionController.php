@@ -32,7 +32,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        if ($request->user()->hasValidSignature) {
+        if (!$request->user()->hasValidSubscription) {
             return redirect()->route('users.account');
         }
 
