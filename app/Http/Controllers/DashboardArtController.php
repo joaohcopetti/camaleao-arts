@@ -16,7 +16,7 @@ class DashboardArtController extends Controller
     public function index()
     {
         return Inertia::render('Dashboard/Art/TheDashboardArts', [
-            'arts' => ArtResource::collection(Art::latest()->paginate())
+            'arts' => ArtResource::collection(Art::latest()->paginate(10))
         ]);
     }
 

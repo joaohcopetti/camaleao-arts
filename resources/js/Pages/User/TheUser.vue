@@ -22,7 +22,7 @@ const onDeleteBtnClick = () => {
 </script>
 
 <template>
-  <div class="w-1/3 mx-auto">
+  <div class="sm:w-1/2 lg:w-1/3 mx-auto">
     <AppCard>
       <template #title> Minha conta </template>
       <template #body>

@@ -28,5 +28,8 @@ defineProps<TheDashboardArtsProps>()
         <DashboardArtsList :arts="arts.data" />
       </template>
     </AppCard>
+    <div class="text-center mt-5">
+      <AppPagination :pagination="{ ...arts.links, ...arts.meta }" />
+    </div>
   </DashboardLayout>
 </template>

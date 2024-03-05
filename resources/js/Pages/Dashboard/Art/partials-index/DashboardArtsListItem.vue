@@ -47,7 +47,7 @@ const dropdownItems = [
         </div>
 
         <div class="text-sm">
-          <span> Cadastro em: {{ DateTime.fromISO(art.created_at).toLocaleString() }} </span>
+          <span> Cadastro em: {{ DateTime.fromISO(art.created_at).toFormat('dd/MM/y') }} </span>
         </div>
       </div>
 

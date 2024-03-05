@@ -3,16 +3,22 @@ import { User } from '@/types'
 import { Link } from '@inertiajs/vue3'
 import { DateTime } from 'luxon'
 
-const props = defineProps<{
+defineProps<{
   user: User
 }>()
 </script>
 
 <template>
   <li class="p-4 bg-base-300 border-b border-base-100 last:border-none flex justify-between">
-    <span>
-      {{ user.name }}
-    </span>
+    <div>
+      <div>{{ user.name }}</div>
+      <div
+        v-if="user.expire_at"
+        class="text-sm"
+      >
+        Data de expiração: {{ DateTime.fromISO(user.expire_at).toFormat('dd/MM/y') }}
+      </div>
+    </div>
     <div class="flex gap-2">
       <AppButton
         :as="Link"
