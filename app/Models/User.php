@@ -65,7 +65,7 @@ class User extends Authenticatable
         return Attribute::make(
             get: fn () => $this->expire_at
                 ? Carbon::now()->lessThanOrEqualTo($this->expire_at)
-                : false
+                : true
         );
     }
 }
