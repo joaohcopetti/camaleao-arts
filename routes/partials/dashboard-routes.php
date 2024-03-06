@@ -15,6 +15,7 @@ Route::name('dashboard.')
         Route::post('/artes/nova', [DashboardArtController::class, 'store'])->name('arts.store');
         Route::get('/artes/{art}/editar', [DashboardArtController::class, 'edit'])->name('arts.edit');
         Route::patch('/artes/{art}/editar', [DashboardArtController::class, 'update'])->name('arts.update');
+        Route::delete('/artes/{art}', [DashboardArtController::class, 'delete'])->name('arts.delete');
 
         Route::get('/categorias', [DashboardCategoryController::class, 'index'])->name('categories.index');
         Route::post('/categorias', [DashboardCategoryController::class, 'store'])->name('categories.store');

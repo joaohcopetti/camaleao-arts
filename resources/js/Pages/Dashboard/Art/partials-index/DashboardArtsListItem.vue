@@ -1,20 +1,16 @@
 <script setup lang="ts">
+import ArtCard from '@/Pages/Art/partials/ArtCard.vue'
 import type { Art } from '@/types'
-import { Link } from '@inertiajs/vue3'
+import { Link, router } from '@inertiajs/vue3'
 import { DateTime } from 'luxon'
 
 const props = defineProps<{
   art: Art
 }>()
 
-const dropdownItems = [
-  {
-    label: 'Editar',
-    as: Link,
-    props: { href: route('dashboard.arts.edit', { art: props.art.slug }) }
-  },
-  { label: 'Excluir', as: Link, props: { href: '' } }
-]
+const onDeleteClick = () => {
+  router.delete(route('dashboard.arts.delete', { art: props.art.slug }))
+}
 </script>
 
 <template>
@@ -29,12 +25,40 @@ const dropdownItems = [
 
     <div class="flex flex-col justify-between mx-5">
       <div class="absolute top-0 right-0">
-        <AppDropdown
-          :items="dropdownItems"
-          trigger-class="btn btn-sm btn-ghost rounded-full w-8 h-8"
-        >
+        <AppDropdown trigger-class="btn btn-sm btn-ghost rounded-full w-8 h-8">
           <template #trigger>
             <FWIcon icon="fas fa-ellipsis" />
+          </template>
+          <template #content>
+            <AppButton
+              label="Editar"
+              class="w-full text-sm rounded-none bg-base-100 border-none"
+              :as="Link"
+              :href="route('dashboard.arts.edit', { art: art.slug })"
+            />
+            <AppDropdown
+              trigger-class="rounded-none w-full"
+              class="w-full rounded-lg"
+            >
+              <template #trigger>
+                <AppButton
+                  label="Excluir"
+                  class="w-full text-sm rounded-none bg-base-100 border-none"
+                />
+              </template>
+              <template #content>
+                <div class="p-3">
+                  <div class="font-bold text-center mb-4">Tem certeza?</div>
+                  <div>
+                    <AppButton
+                      label="Confirmar"
+                      class="btn-sm btn-success w-full"
+                      @click.prevent="onDeleteClick"
+                    />
+                  </div>
+                </div>
+              </template>
+            </AppDropdown>
           </template>
         </AppDropdown>
       </div>

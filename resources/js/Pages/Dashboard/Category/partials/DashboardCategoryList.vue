@@ -39,7 +39,7 @@ const onEdit = (category: Category) => {
       <DashboardCategoryForm />
     </div>
     <div>
-      <ul class="rounded-lg overflow-hidden">
+      <ul class="rounded-lg">
         <template
           v-for="category in categories"
           :key="category.slug"

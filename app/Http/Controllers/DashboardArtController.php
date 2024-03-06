@@ -76,4 +76,14 @@ class DashboardArtController extends Controller
 
         return redirect()->route('dashboard.arts.index');
     }
+
+    public function delete(Art $art)
+    {
+        Art::deleteFile($art->filepath);
+        Art::deleteFile($art->image_filepath);
+
+        $art->delete();
+
+        return redirect()->route('arts.index');
+    }
 }
