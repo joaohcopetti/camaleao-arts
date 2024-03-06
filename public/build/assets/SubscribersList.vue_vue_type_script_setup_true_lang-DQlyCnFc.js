@@ -1,1 +1,0 @@
-import{_ as t}from"./SubscribersListItem.vue_vue_type_script_setup_true_lang-fy4D8nBz.js";import{d as a,c as s,F as o,g as c,o as e,e as u}from"./app-BNgyZrzo.js";const i=a({__name:"SubscribersList",props:{users:{}},setup(l){return(n,_)=>(e(),s("ul",null,[(e(!0),s(o,null,c(n.users,r=>(e(),u(t,{key:r.id,user:r},null,8,["user"]))),128))]))}});export{i as _};

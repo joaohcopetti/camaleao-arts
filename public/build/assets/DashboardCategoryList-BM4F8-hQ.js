@@ -1,1 +1,0 @@
-import{_ as o}from"./DashboardCategoryList.vue_vue_type_script_setup_true_lang-CNPbNQTx.js";import"./app-BNgyZrzo.js";import"./DashboardCategoryForm.vue_vue_type_script_setup_true_lang-Bsn0Egoe.js";import"./DashboardCategoryListItem.vue_vue_type_script_setup_true_lang-DS_dNWuT.js";export{o as default};

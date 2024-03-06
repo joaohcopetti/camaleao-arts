@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        $schedule->command(SyncSubscriberPermissionCommand::class)->everySecond();
+        $schedule->command(SyncSubscriberPermissionCommand::class)->hourly();
         // $schedule->command('inspire')->hourly();
     }
 

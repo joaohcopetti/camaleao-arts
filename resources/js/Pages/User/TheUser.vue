@@ -2,6 +2,7 @@
 import type { User } from '@/types'
 import { Link, router } from '@inertiajs/vue3'
 import { DateTime } from 'luxon'
+
 const props = defineProps<{
   user: User
 }>()
@@ -12,7 +13,9 @@ const userInfo = [
   { label: 'Senha', value: '*****' },
   {
     label: 'Assinatura expira em: ',
-    value: DateTime.fromISO(props.user.expire_at).toFormat('dd/MM/y')
+    value: props.user.expire_at
+      ? DateTime.fromISO(props.user.expire_at).toFormat('dd/MM/y')
+      : 'Nunca'
   }
 ]
 
