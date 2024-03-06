@@ -29,11 +29,16 @@ class DashboardArtRequest extends FormRequest
     public function rules(): array
     {
         $isEdit = request()->method() === 'PATCH';
-        $fileRules = ['required', 'file', 'extensions:cdr'];
+        $fileRules = ['file', 'extensions:cdr'];
 
         return [
             'name' => ['required'],
-            'file' => $isEdit ? ['sometimes', ...$fileRules] : $fileRules,
+            'file' => $isEdit
+                ? ['sometimes', 'nullable', 'file', 'extensions:cdr']
+                : ['required', 'file', 'extensions:cdr'],
+            'image' => $isEdit
+                ? ['sometimes', 'nullable', 'file', 'extensions:jpg,png,jpeg']
+                : ['required', 'file', 'extensions:jpg,png,jpeg'],
             'category' => ['required', 'exists:categories,id']
         ];
     }

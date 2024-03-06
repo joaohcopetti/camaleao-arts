@@ -33,7 +33,8 @@ class DashboardArtController extends Controller
 
         $category->arts()->create([
             'name' => $request->name,
-            'filepath' => $this->storeImage($request->file)
+            'filepath' => $this->storeImage($request->file),
+            'image_filepath' => $this->storeImage($request->image),
         ]);
 
         return redirect()->route('dashboard.arts.index');
@@ -43,11 +44,10 @@ class DashboardArtController extends Controller
     {
         $extension  = pathinfo($file->getClientOriginalName(), PATHINFO_EXTENSION);
         $filename = Str::random() . '.' . $extension;
+
         $filepath = $file->storeAs(Art::$STORAGE_PATH, $filename);
 
-        StoreCorelAsImageAction::execute($filepath);
-
-        return $filepath;
+        return pathinfo($filepath, PATHINFO_BASENAME);
     }
 
     public function edit(Art $art)
@@ -63,8 +63,13 @@ class DashboardArtController extends Controller
         $art->category()->associate($request->category);
 
         if ($request->file) {
-            $art->deleteFile();
+            Art::deleteFile($art->filename);
             $art->filepath = $this->storeImage($request->file);
+        }
+
+        if ($request->image) {
+            Art::deleteFile($art->image_filepath);
+            $art->image_filepath = $this->storeImage($request->image);
         }
 
         $art->save();

@@ -15,6 +15,7 @@ return new class () extends Migration {
             $table->string('name');
             $table->string('slug')->unique();
             $table->string('filepath');
+            $table->string('image_filepath');
             $table->foreignUuid('category_id')
                 ->nullable()
                 ->constrained('categories')

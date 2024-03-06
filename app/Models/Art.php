@@ -22,7 +22,8 @@ class Art extends Model
     protected $table = 'arts';
     protected $fillable = [
         'name',
-        'filepath'
+        'filepath',
+        'image_filepath'
     ];
 
     public static $STORAGE_PATH = 'artes';
@@ -51,20 +52,10 @@ class Art extends Model
         );
     }
 
-    public function imageFilename(): Attribute
-    {
-        return Attribute::make(
-            get: fn () => pathinfo($this->filepath, PATHINFO_FILENAME) . '.png'
-        );
-    }
-
-    public function deleteFile()
+    public static function deleteFile($filename)
     {
         $path = static::$STORAGE_PATH . '/';
 
-        return Storage::delete([
-            $path . $this->filename,
-            $path . $this->imageFilename
-        ]);
+        return Storage::delete($path . $filename);
     }
 }

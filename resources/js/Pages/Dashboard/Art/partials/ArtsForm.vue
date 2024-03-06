@@ -7,6 +7,7 @@ import { onMounted } from 'vue'
 type ArtsCreateForm = {
   name: string
   file?: File
+  image?: File
   category?: Category
 }
 
@@ -18,6 +19,7 @@ const props = defineProps<{
 const form = useForm<ArtsCreateForm>({
   name: '',
   file: undefined,
+  image: undefined,
   category: undefined
 })
 
@@ -28,8 +30,8 @@ const endpoint = computed(() =>
     : route('dashboard.arts.store')
 )
 
-const onInputFile = (file: File | undefined) => {
-  form.file = file
+const onInputFile = (file: File | undefined, field: 'file' | 'image') => {
+  form[field] = file
 }
 
 const populateForm = () => {
@@ -66,7 +68,15 @@ onMounted(() => {
       :hint="['Tipos aceitos: .cdr', isEdit && 'Deixe em branco caso não queira alterar a arte']"
       :error-message="form.errors.file"
       accept=".cdr"
-      @change="onInputFile"
+      @change="onInputFile($event, 'file')"
+    />
+    <AppInputFile
+      label="Imagem da arte"
+      name="image"
+      :hint="[isEdit && 'Deixe em branco caso não queira alterar a arte']"
+      :error-message="form.errors.image"
+      accept=".png,.jpeg,.jpg"
+      @change="onInputFile($event, 'image')"
     />
     <AppCombobox
       v-model="form.category"

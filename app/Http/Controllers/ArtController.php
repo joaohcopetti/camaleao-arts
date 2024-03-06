@@ -31,7 +31,7 @@ class ArtController extends Controller
 
     public function downloadImage(Art $art)
     {
-        $filepath = Art::$STORAGE_PATH . "/$art->imageFilename";
+        $filepath = Art::$STORAGE_PATH . "/$art->image_filepath";
 
         if (!Storage::exists($filepath)) {
             abort(404);
